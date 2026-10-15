@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Arabic Keyboard Converter (مصحح الكتابة العربية)",
+  "version": "1.0.0",
+  "description": "Fixes English letters mistakenly typed instead of Arabic. Convert text instantly with Alt+A or right-click.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Arabic Keyboard Converter"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["converter.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "convert-to-arabic": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      },
+      "description": "Convert selected or active text to Arabic"
+    },
+    "convert-to-english": {
+      "suggested_key": {
+        "default": "Alt+E",
+        "mac": "Alt+E"
+      },
+      "description": "Convert selected or active text to English"
+    }
+  }
+}
